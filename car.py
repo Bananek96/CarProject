@@ -1,5 +1,6 @@
 from position import Position
 from map import Map
+import math
 
 class Car:
     def __init__(self):
@@ -30,17 +31,17 @@ class Car:
     def move_backwards(self, speed) -> None:
         self.speed = speed * (-1)
 
-    def run_model(self, delta_t: int):
-        angle = self.position.angle
-        if angle > 360:
-            ile = angle / 360
-            angle = angle - ile * 360
-        else:
-            if angle == 0:
-                self.position.y = self.position.y + delta_t * self.speed
-            elif angle == 90:
-                self.position.x = self.position.x + delta_t * self.speed
-            elif angle == 180:
-                self.position.y = self.position.y - delta_t * self.speed
-            elif angle == 270:
-                self.position.x = self.position.x - delta_t * self.speed
+    def run_model(self, delta_t: float):
+        # Reset angle to range [0, 360)
+        angle = self.position.angle % 360
+
+        # Convert angle to radians (trigonometric functions in Python use radians)
+        angle_radians = math.radians(angle)
+
+        # Calculation of displacement in the X and Y axes based on angle, velocity and delta_t
+        delta_x = math.cos(angle_radians) * self.speed * delta_t
+        delta_y = math.sin(angle_radians) * self.speed * delta_t
+
+        # Position update
+        self.position.x += delta_x
+        self.position.y += delta_y
