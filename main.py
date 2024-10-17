@@ -1,4 +1,6 @@
-from flask import Flask
+import json
+
+from flask import Flask, jsonify, request
 from car import Car
 import threading
 import time
@@ -18,12 +20,27 @@ t_ref = threading.Thread(target=run_model, args=[0.1])
 t_ref.deamon = True
 t_ref.start()
 
-@app.route('/forward')
+@app.route('/forward', methods=['POST'])
 def set_forward():
+    """
+    {speed: 100}
+    """
+    speed = request.json['speed']
     with lock:
-        car.move_forward(1)
+        car.move_forward(speed)
+    return jsonify({'speed': speed}), 201
+
+@app.route('/stop')
+def set_stop():
+    with lock:
+        car.stop()
     return "OK", 201
 
+@app.route('/backward')
+def set_backward():
+    with lock:
+        car.move_backwards(1)
+    return "OK", 201
 @app.route("/")
 def hello_world():
     with lock:
