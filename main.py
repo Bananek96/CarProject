@@ -1,5 +1,4 @@
 import json
-
 from flask import Flask, jsonify, request
 from car import Car
 import threading
@@ -22,25 +21,41 @@ t_ref.start()
 
 @app.route('/forward', methods=['POST'])
 def set_forward():
-    """
-    {speed: 100}
-    """
     speed = request.json['speed']
     with lock:
         car.move_forward(speed)
     return jsonify({'speed': speed}), 201
 
-@app.route('/stop')
+@app.route('/stop', methods=['POST'])
 def set_stop():
+    speed = request.json['speed']
     with lock:
         car.stop()
-    return "OK", 201
+    return jsonify({'speed': speed}), 201
 
-@app.route('/backward')
+@app.route('/backward', methods=['POST'])
 def set_backward():
+    speed = request.json['speed']
     with lock:
-        car.move_backwards(1)
-    return "OK", 201
+        car.move_backwards(speed)
+    return jsonify({'speed': speed}), 201
+
+@app.route('/left', methods=['POST'])
+def set_left():
+    angle = request.json['angle']
+    angle = angle % 360
+    with lock:
+        car.turn(angle)
+    return jsonify({'angle': angle}), 201
+
+@app.route('/right', methods=['POST'])
+def set_right():
+    angle = request.json['angle']
+    angle = angle % 360
+    with lock:
+        car.turn(angle)
+    return jsonify({'angle': angle}), 201
+
 @app.route("/")
 def hello_world():
     with lock:

@@ -32,15 +32,14 @@ class Car:
         self.speed = speed * (-1)
 
     def run_model(self, delta_t: float):
-        # Reset angle to range [0, 360)
-        angle = self.position.angle % 360
+        angle = self.position.angle
 
         # Convert angle to radians (trigonometric functions in Python use radians)
         angle_radians = math.radians(angle)
 
         # Calculation of displacement in the X and Y axes based on angle, velocity and delta_t
-        delta_x = math.cos(angle_radians) * self.speed * delta_t
-        delta_y = math.sin(angle_radians) * self.speed * delta_t
+        delta_y = math.cos(angle_radians) * self.speed * delta_t
+        delta_x = math.sin(angle_radians) * self.speed * delta_t
 
         # Position update
         self.position.x += delta_x

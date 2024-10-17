@@ -6,4 +6,4 @@ class Position:
 	def __init__(self):
 		self.x: float = 0
 		self.y: float = 0
-		self.angle: float = 45
+		self.angle: float = 0
