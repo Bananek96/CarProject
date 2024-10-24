@@ -40,16 +40,8 @@ def set_backward():
         car.move_backwards(speed)
     return jsonify({'speed': speed}), 201
 
-@app.route('/left', methods=['POST'])
+@app.route('/turn', methods=['POST'])
 def set_left():
-    angle = request.json['angle']
-    angle = angle % 360
-    with lock:
-        car.turn(angle)
-    return jsonify({'angle': angle}), 201
-
-@app.route('/right', methods=['POST'])
-def set_right():
     angle = request.json['angle']
     angle = angle % 360
     with lock:
