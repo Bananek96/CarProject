@@ -3,10 +3,15 @@ from flask import Flask, jsonify, request
 from car import Car
 import threading
 import time
+from map import Map
 
 app = Flask(__name__)
 
 car = Car()
+word_map = Map().prepare_map()
+word_map_array = Map().load_map_from_image('maze.png')
+#TODO
+# car.load_map(word_map_array)
 lock = threading.Lock()
 
 def run_model(delta_t:float):
