@@ -69,7 +69,6 @@ class Map:
 		maze = self.generate_maze(maze_width, maze_height)
 		self.draw_maze(maze, cell_size=cell_size, passage_width=passage_width)
 
-
 	def load_map_from_image(self, filename) -> np.array:
         # Wczytujemy obraz
 		image = Image.open(filename).convert("L")  # Konwertujemy na obraz w odcieniach szarości
@@ -82,3 +81,4 @@ class Map:
 		maze = np.where(img_data > 127, 1, 0)  # Wartość progowa 127 dla szarości
         
 		return maze
+

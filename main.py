@@ -54,7 +54,7 @@ def set_left():
     return jsonify({'angle': angle}), 201
 
 @app.route("/")
-def hello_world():
+def hello_world ():
     with lock:
         text = car.__str__()
     return text, 200
