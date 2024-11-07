@@ -68,3 +68,5 @@ class Map:
 		# Generacja i zapis labiryntu
 		maze = self.generate_maze(maze_width, maze_height)
 		self.draw_maze(maze, cell_size=cell_size, passage_width=passage_width)
+
+Map().prepare_map()
