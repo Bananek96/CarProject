@@ -22,7 +22,7 @@ class Car:
     def turn(self, angle) -> None:
         self.position.angle = angle
 
-    def load(self, map: Map) -> None:
+    def load_map(self, map: Map) -> None:
         raise NotImplementedError("To Do")
 
     def stop(self) -> None:
