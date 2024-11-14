@@ -5,7 +5,18 @@ import math
 class Car:
     def __init__(self):
         self.speed: int = 0  # m/s
-        self.position = Position()
+        Map().prepare_map()
+        word_map_array = Map().load_map_from_image('maze.png')
+        self.load_map(word_map_array)
+        size_x = int(len(word_map_array)/2)
+        size_y = int(len(word_map_array[1])/2)
+        # jest ryzyko ze trafilismy w sciane
+        # 0 to jest sciana
+        for _ in range(size_x):
+            if(word_map_array[size_x][size_y]==1):
+                break
+            size_x = size_x+1
+        self.position = Position(init_x=size_x, init_y=size_y)
 
     def __str__(self) -> str:
         return (f"x: {self.position.x}, y: {self.position.y}, angle: {self.position.angle}")
@@ -23,7 +34,7 @@ class Car:
         self.position.angle = angle
 
     def load_map(self, map: Map) -> None:
-        raise NotImplementedError("To Do")
+        self.word_map = map
 
     def stop(self) -> None:
         self.speed = 0
