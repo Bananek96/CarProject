@@ -1,6 +1,7 @@
 from position import Position
 from map import Map
 import math
+from PIL import Image, ImageDraw
 
 class Car:
     def __init__(self):
@@ -17,6 +18,7 @@ class Car:
                 break
             size_x = size_x+1
         self.position = Position(init_x=size_x, init_y=size_y)
+        self.draw_position(size_x,size_y)
 
     def __str__(self) -> str:
         return (f"x: {self.position.x}, y: {self.position.y}, angle: {self.position.angle}")
@@ -55,3 +57,16 @@ class Car:
         # Position update
         self.position.x += delta_x
         self.position.y += delta_y
+
+    def draw_position(self, size_x, size_y):
+        
+        image_path = 'maze.png' 
+        img = Image.open(image_path)
+        # Współrzędne x i y dla czerwonej kropki
+        x, y = size_x, size_y 
+        # Stworzenie obiektu do rysowania na obrazie
+        draw = ImageDraw.Draw(img)
+        # Narysowanie czerwonej kropki (można zmienić rozmiar, jeśli chcesz większą)
+        draw.ellipse((x - 2, y - 2, x + 2, y + 2), fill="red")
+        # Zapisanie zmodyfikowanego obrazu
+        img.save('maze_position.png')
