@@ -23,7 +23,7 @@ class Car:
         self.word_map_array = word_map_array
 
     def __str__(self) -> str:
-        return (f"x: {self.position.x}, y: {self.position.y}, angle: {self.position.angle}")
+        return (f"x: {self.position.x}, y: {self.position.y}, angle: {self.position.angle}, distance: {self.distance_to_obstacle()}")
 
     def get_position(self) -> Position:
         return self.position
