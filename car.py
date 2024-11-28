@@ -20,6 +20,7 @@ class Car:
             size_x = size_x+1
         self.position = Position(init_x=size_x, init_y=size_y)
         self.draw_position(size_x,size_y)
+        self.word_map_array = word_map_array
 
     def __str__(self) -> str:
         return (f"x: {self.position.x}, y: {self.position.y}, angle: {self.position.angle}")
