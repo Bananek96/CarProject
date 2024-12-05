@@ -84,7 +84,7 @@ class Car:
         sprawdzaniu kolejnych punktów wzdłuż linii ruchu pojazdu, 
         aż do napotkania przeszkody.
         """
-        angle_radians = math.radians(self.position.angle) * (-1)
+        angle_radians = math.radians(self.position.angle)
 
         # Pozycja startowa
         x = self.position.x
