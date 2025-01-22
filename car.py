@@ -52,11 +52,11 @@ class Car:
         angle = self.position.angle
 
         # Convert angle to radians (trigonometric functions in Python use radians)
-        angle_radians = math.radians(angle) *(-1)
+        angle_radians = math.radians(angle)*(-1)
 
         # Calculation of displacement in the X and Y axes based on angle, velocity and delta_t
-        delta_y = math.cos(angle_radians) * self.speed * delta_t * (-1)
-        delta_x = math.sin(angle_radians) * self.speed * delta_t * (-1)
+        delta_y = math.cos(angle_radians) * self.speed * delta_t
+        delta_x = math.sin(angle_radians) * self.speed * delta_t*(-1)
 
         # Position update
         self.position.x += delta_x
